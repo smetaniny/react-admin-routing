@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Smetaniny\ReactAdminRouting\Contracts\ResourceShowInterface;
 use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerFactoryInterface;
 use Smetaniny\ReactAdminRouting\Factories\RouteHandlerFactory;
+use Smetaniny\ReactAdminRouting\Middleware\AdminMiddleware;
+use Smetaniny\ReactAdminRouting\Middleware\RoleAdminMiddleware;
 use Smetaniny\ReactAdminRouting\Services\ResourceShowService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyFirstService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyGetService;
@@ -38,6 +40,14 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/react-admin-routing.php', 'react-admin-routing');
 
+        // Регистрация Middleware
+        $this->app->singleton(AdminMiddleware::class);
+        $this->app->singleton(RoleAdminMiddleware::class);
+
+        // Добавление псевдонимов middleware
+        $this->app['router']->aliasMiddleware('admin', AdminMiddleware::class);
+        $this->app['router']->aliasMiddleware('role', RoleAdminMiddleware::class);
+
         // Регистрация фабрики обработчиков маршрутов
         $this->app->singleton(RouteHandlerFactoryInterface::class, function ($app) {
             return new RouteHandlerFactory();
@@ -53,6 +63,8 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
 
         // Помечает классы ResourceStrategyFirstService и ResourceStrategyGetService тегом 'QueryStrategyInterface'
         $this->app->tag([ResourceStrategyFirstService::class, ResourceStrategyGetService::class], 'QueryStrategyInterface');
+
+
     }
 
     /**

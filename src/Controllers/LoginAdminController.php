@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Smetaniny\ReactAdminRouting\Controllers;
 
-use App\Models\Admin\UsersAdminModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Smetaniny\ReactAdminRouting\Models\UsersAdminModel;
 use Smetaniny\ReactAdminRouting\Exceptions\UnauthorizedAdminException;
 use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
 use Smetaniny\ReactAdminRouting\Requests\LoginAdminRequest;

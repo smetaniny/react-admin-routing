@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Smetaniny\ReactAdminRouting\Exceptions;
 
 use Exception;
-use Facades\RouteHandlerFactoryFacade;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
 
 /**
  * Исключение для обработки ошибок авторизации в админ панель.

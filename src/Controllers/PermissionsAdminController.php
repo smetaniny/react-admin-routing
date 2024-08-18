@@ -3,9 +3,9 @@
 namespace Smetaniny\ReactAdminRouting\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\PermissionsModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Smetaniny\ReactAdminRouting\Models\PermissionsModel;
 use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
 
 /**

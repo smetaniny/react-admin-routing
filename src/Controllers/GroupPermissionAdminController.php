@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Smetaniny\ReactAdminRouting\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\GroupPermissionsModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Smetaniny\ReactAdminRouting\Models\GroupPermissionsModel;
 use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
 
 /**

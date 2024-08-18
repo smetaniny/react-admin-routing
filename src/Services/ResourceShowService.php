@@ -210,28 +210,40 @@ class ResourceShowService implements ResourceShowInterface
      */
     public function sort(): self
     {
-        // Получаем массив параметров сортировки из запроса.
-        $this->sort = $this->getRequest()->only('_order', '_sort') ?? [];
+        // Инициализация сортировки как пустого массива
+        $this->sort = [];
 
-        if (isset($this->sort['_order'], $this->sort['_sort'])) {
-            // Если параметры сортировки указаны, применяем их к запросу.
-            $this->getQuery()->orderBy($this->sort['_sort'], $this->sort['_order']);
+        // Получаем параметры сортировки из запроса
+        $requestSort = $this->getRequest()->only('_order', '_sort');
+
+        // Применяем параметры сортировки, если они указаны
+        if (!empty($requestSort['_order']) && !empty($requestSort['_sort'])) {
+            $this->getQuery()->orderBy($requestSort['_sort'], $requestSort['_order']);
         }
 
-        // Получаем параметр сортировки в формате JSON и декодируем его.
-        $this->sort = json_decode($this->getRequest()->input('sort', ''), true);
+        // Получаем и декодируем параметр сортировки в формате JSON
+        $sortInput = $this->getRequest()->input('sort', '{}');
+        $decodedSort = json_decode($sortInput, true);
 
-        // Если параметр сортировки задан, применяем его.
-        if (isset($this->sort['field'], $this->sort['order'])) {
+        // Проверяем, что результат декодирования является массивом
+        if (is_array($decodedSort)) {
+            $this->sort = $decodedSort;
+        }
+
+        // Применяем сортировку, если указаны поле и порядок
+        if (isset($this->sort['field']) && isset($this->sort['order'])) {
             $field = $this->sort['field'];
             $order = strtoupper($this->sort['order']);
-            // Применяем сортировку к запросу.
-            $this->getQuery()->orderBy($field, $order);
+            // Проверяем допустимость порядка сортировки
+            if (in_array($order, ['ASC', 'DESC'], true)) {
+                $this->getQuery()->orderBy($field, $order);
+            }
         }
 
-        // Возвращаем текущий экземпляр класса для возможности цепочки вызовов.
+        // Возвращаем текущий экземпляр класса для возможности цепочки вызовов
         return $this;
     }
+
 
     /**
      * Применяет фильтры к запросу.
