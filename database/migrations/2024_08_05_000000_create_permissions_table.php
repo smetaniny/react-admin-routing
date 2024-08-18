@@ -26,53 +26,53 @@ return new class extends Migration {
 
         // Insert data into the permissions table
         DB::table('permissions')->insert([
-            ['name' => 'PagesList', 'description' => 'Показ страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PagesCreate', 'description' => 'Создание страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PagesEdit', 'description' => 'Редактирование страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'pages.list', 'description' => 'Показ страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'pages.create', 'description' => 'Создание страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'pages.edit', 'description' => 'Редактирование страниц сайта', 'group_permission_id' => 1, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'UsersAdminList', 'description' => 'Показ списка пользователей админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'UsersAdminCreate', 'description' => 'Создание пользователя админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'UsersAdminEdit', 'description' => 'Редактирование пользователя админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'users.admin.list', 'description' => 'Показ списка пользователей админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'users.admin.create', 'description' => 'Создание пользователя админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'users.admin.edit', 'description' => 'Редактирование пользователя админки', 'group_permission_id' => 2, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'CategoriesList', 'description' => 'Показ списка категорий', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'CategoriesCreate', 'description' => 'Создание категории', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'CategoriesEdit', 'description' => 'Редактирование категории', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'categories.list', 'description' => 'Показ списка категорий', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'categories.create', 'description' => 'Создание категории', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'categories.edit', 'description' => 'Редактирование категории', 'group_permission_id' => 3, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'ContentsList', 'description' => 'Показ списка контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ContentsCreate', 'description' => 'Создание контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ContentsEdit', 'description' => 'Редактирование контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'contents.list', 'description' => 'Показ списка контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'contents.create', 'description' => 'Создание контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'contents.edit', 'description' => 'Редактирование контента', 'group_permission_id' => 4, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'ProductAttributesList', 'description' => 'Показ списка атрибутов продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductAttributesCreate', 'description' => 'Создание атрибута продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductAttributesEdit', 'description' => 'Редактирование атрибута продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attributes.list', 'description' => 'Показ списка атрибутов продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attributes.create', 'description' => 'Создание атрибута продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attributes.edit', 'description' => 'Редактирование атрибута продукта', 'group_permission_id' => 5, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'ProductAttributeValuesList', 'description' => 'Показ списка значений атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductAttributeValuesCreate', 'description' => 'Создание значения атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductAttributeValuesEdit', 'description' => 'Редактирование значения атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attribute.values.list', 'description' => 'Показ списка значений атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attribute.values.create', 'description' => 'Создание значения атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'product.attribute.values.edit', 'description' => 'Редактирование значения атрибута продукта', 'group_permission_id' => 6, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'ProductsList', 'description' => 'Показ списка продуктов', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductsCreate', 'description' => 'Создание продукта', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'ProductsEdit', 'description' => 'Редактирование продукта', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'products.list', 'description' => 'Показ списка продуктов', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'products.create', 'description' => 'Создание продукта', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'products.edit', 'description' => 'Редактирование продукта', 'group_permission_id' => 7, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'RolesList', 'description' => 'Показ списка ролей', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'RolesCreate', 'description' => 'Создание роли', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'RolesEdit', 'description' => 'Редактирование роли', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'roles.list', 'description' => 'Показ списка ролей', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'roles.create', 'description' => 'Создание роли', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'roles.edit', 'description' => 'Редактирование роли', 'group_permission_id' => 8, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'PermissionRoleList', 'description' => 'Показ списка разрешений ролей', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PermissionRoleCreate', 'description' => 'Создание разрешения роли', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PermissionRoleEdit', 'description' => 'Редактирование разрешения роли', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permission.role.list', 'description' => 'Показ списка разрешений ролей', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permission.role.create', 'description' => 'Создание разрешения роли', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permission.role.edit', 'description' => 'Редактирование разрешения роли', 'group_permission_id' => 9, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'PermissionsList', 'description' => 'Показ списка разрешений', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PermissionsCreate', 'description' => 'Создание разрешения', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'PermissionsEdit', 'description' => 'Редактирование разрешения', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permissions.list', 'description' => 'Показ списка разрешений', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permissions.create', 'description' => 'Создание разрешения', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'permissions.edit', 'description' => 'Редактирование разрешения', 'group_permission_id' => 10, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'InternationalSizesList', 'description' => 'Показ списка международных размеров', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'InternationalSizesCreate', 'description' => 'Создание международного размера', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'InternationalSizesEdit', 'description' => 'Редактирование международного размера', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'international.sizes.list', 'description' => 'Показ списка международных размеров', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'international.sizes.create', 'description' => 'Создание международного размера', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'international.sizes.edit', 'description' => 'Редактирование международного размера', 'group_permission_id' => 11, 'created_at' => now(), 'updated_at' => now()],
 
-            ['name' => 'RussianSizesList', 'description' => 'Показ списка русских размеров', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'RussianSizesCreate', 'description' => 'Создание русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'RussianSizesEdit', 'description' => 'Редактирование русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'russian.sizes.list', 'description' => 'Показ списка русских размеров', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'russian.sizes.create', 'description' => 'Создание русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'russian.sizes.edit', 'description' => 'Редактирование русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 
