@@ -34,10 +34,11 @@ class AdminRouteHandlerServices implements RouteHandlerInterface
         $status = $status ?? Config::get('react-admin-routing.common.status');
         // Данные ответа
         $data = $request->data ?? Config::get('react-admin-routing.common.data');
+        // Добавление ключа api редактора
+        $data[]['tinymce-api-key'] = Config::get('react-admin-routing.tinymce-api-key');
         // Ошибки ответа
         $errors = $request->errors ?? Config::get('react-admin-routing.common.errors');
 
-        // Если тип ресурс
         // Если тип ресурс
         if ($type === 'resource') {
             // Если параметр '$query' не был передан, выбрасываем исключение
