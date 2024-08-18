@@ -427,7 +427,7 @@ class ResourceShowService implements ResourceShowInterface
      *
      * @return JsonResponse JSON-ответ с данными запроса и заголовками.
      */
-    public function responseJson(array $apiHeaders): JsonResponse
+    public function responseJson(): JsonResponse
     {
         // Формируем JSON-ответ с данными, общим количеством элементов и заголовками
         return response()
@@ -440,9 +440,7 @@ class ResourceShowService implements ResourceShowInterface
             // Устанавливаем заголовок с информацией о диапазоне элементов и общем количестве элементов
             ->header('Content-Range', "items {$this->start}-{$this->end}/" . $this->count)
             // Устанавливаем заголовок, разрешающий доступ к заголовкам X-Total-Count и Content-Range
-            ->header('Access-Control-Expose-Headers', 'X-Total-Count, Content-Range')
-            // Устанавливаем дополнительные заголовки, переданные в массиве
-            ->withHeaders($apiHeaders);
+            ->header('Access-Control-Expose-Headers', 'X-Total-Count, Content-Range');
     }
 
     /**

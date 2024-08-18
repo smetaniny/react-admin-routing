@@ -62,7 +62,7 @@ interface ResourceShowInterface extends QueryStrategyInterface, SetQueryStrategy
      *
      * @return JsonResponse
      */
-    public function responseJson(array $apiHeaders) : JsonResponse;
+    public function responseJson() : JsonResponse;
 
     /**
      *  Получение результата
