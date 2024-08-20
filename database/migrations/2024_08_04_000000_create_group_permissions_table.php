@@ -34,6 +34,7 @@ return new class extends Migration
             ['name' => 'Разрешения', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Международные размеры', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Русские размеры', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Пользователи сайта', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 

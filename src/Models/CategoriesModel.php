@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Kalnoy\Nestedset\NodeTrait;
 
 /**
  * Класс модели категорий.
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CategoriesModel extends Model
 {
     // Использование фабрики для создания экземпляров модели.
-    use HasFactory;
+    use HasFactory, NodeTrait;
 
     // Имя таблицы в базе данных.
     protected $table = 'categories';

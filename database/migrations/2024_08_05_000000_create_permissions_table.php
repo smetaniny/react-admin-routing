@@ -73,6 +73,11 @@ return new class extends Migration {
             ['name' => 'russian.sizes.list', 'description' => 'Показ списка русских размеров', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'russian.sizes.create', 'description' => 'Создание русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'russian.sizes.edit', 'description' => 'Редактирование русского размера', 'group_permission_id' => 12, 'created_at' => now(), 'updated_at' => now()],
+
+            ['name' => 'users.list', 'description' => 'Показ списка пользователей сайта', 'group_permission_id' => 13, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'users.create', 'description' => 'Создание пользователя сайта', 'group_permission_id' => 13, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'users.edit', 'description' => 'Редактирование пользователя сайта', 'group_permission_id' => 13, 'created_at' => now(), 'updated_at' => now()],
+
         ]);
     }
 

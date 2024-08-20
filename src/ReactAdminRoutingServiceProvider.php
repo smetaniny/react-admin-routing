@@ -89,6 +89,11 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
             __DIR__ . '/../config/react-admin-routing.php' => config_path('react-admin-routing.php'),
         ], 'react-admin-routing.config');
 
+        // Регистрируем команду импорта категорий php artisan import:categories
+        $this->commands([
+            \Smetaniny\ReactAdminRouting\Console\Commands\ImportCategoriesCommand::class,
+        ]);
+
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/smetaniny'),

@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Smetaniny\ReactAdminRouting\Enums\UserAdminRole;
 
-
 Route::prefix('admin')->name('admin.')->group(function () {
     // Авторизация администратора
     Route::post('/login', [\Smetaniny\ReactAdminRouting\Controllers\LoginAdminController::class, 'index'])->name('login');
@@ -29,6 +28,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Маршруты для работы с группами разрешений администраторов
         Route::resource('groupPermission', \Smetaniny\ReactAdminRouting\Controllers\GroupPermissionAdminController::class)->names('groupPermission')
+            ->middleware('role:' . UserAdminRole::ADMIN->value . ',' . UserAdminRole::EDITOR->value);
+
+        // Маршруты для работы с администраторами пользователей
+        Route::resource('users', \Smetaniny\ReactAdminRouting\Controllers\UsersController::class)->names('users')
             ->middleware('role:' . UserAdminRole::ADMIN->value . ',' . UserAdminRole::EDITOR->value);
     });
 
