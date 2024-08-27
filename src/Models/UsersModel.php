@@ -17,7 +17,7 @@ class UsersModel extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     // Имя таблицы в базе данных.
-    protected $table = 'users_admin';
+    protected $table = 'users';
 
     //Есть автоинкремент
     public $incrementing = true;

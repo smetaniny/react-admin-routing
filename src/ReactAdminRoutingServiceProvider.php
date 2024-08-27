@@ -94,6 +94,12 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
             \Smetaniny\ReactAdminRouting\Console\Commands\ImportCategoriesCommand::class,
         ]);
 
+        // php artisan vendor:publish --provider="Smetaniny\ReactAdminRouting\ReactAdminRoutingServiceProvider" --tag="react-admin-routing.routes"
+        $this->publishes([
+            __DIR__ . '/routes.php' => base_path('routes/vendor/react-admin-routing.php'),
+        ], 'react-admin-routing.routes');
+
+
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/smetaniny'),

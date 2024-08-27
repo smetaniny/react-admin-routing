@@ -5,6 +5,9 @@ namespace Smetaniny\ReactAdminRouting\Console\Commands;
 use Illuminate\Console\Command;
 use Smetaniny\ReactAdminRouting\Models\CategoriesModel;
 
+/**
+ *  Выполняет импорт категорий в БД php artisan import:categories categories/cloth.json
+ */
 class ImportCategoriesCommand extends Command
 {
     /**
@@ -12,7 +15,8 @@ class ImportCategoriesCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'import:categories';
+    protected $signature = 'import:categories {file=database/data/categories/cloth.json : Путь к JSON файлу}';
+
 
     /**
      * Описание консольной команды.
@@ -26,11 +30,27 @@ class ImportCategoriesCommand extends Command
      */
     public function handle(): void
     {
-        // Чтение JSON файла, который хранится в папке "database/data" внутри пакета
-        $json = file_get_contents(__DIR__ . '/../../../database/data/categories.json');
+        // Получение пути к файлу из аргументов команды
+        $filePath = $this->argument('file');
+
+        // Построение полного пути к файлу
+        $fullPath = __DIR__ . '/../../../database/data/' . $filePath;
+
+        // Чтение JSON файла
+        if (!file_exists($fullPath)) {
+            $this->error("Файл не найден: {$fullPath}");
+            return;
+        }
+
+        $json = file_get_contents($fullPath);
 
         // Декодирование JSON в массив
         $data = json_decode($json, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $this->error("Ошибка декодирования JSON: " . json_last_error_msg());
+            return;
+        }
 
         // Рекурсивное сохранение категорий в базе данных
         $this->saveCategories($data);
