@@ -3,11 +3,13 @@
 namespace Smetaniny\ReactAdminRouting;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Smetaniny\ReactAdminRouting\Contracts\ResourceShowInterface;
-use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerFactoryInterface;
+use Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface;
 use Smetaniny\ReactAdminRouting\Factories\RouteHandlerFactory;
 use Smetaniny\ReactAdminRouting\Middleware\AdminMiddleware;
 use Smetaniny\ReactAdminRouting\Middleware\RoleAdminMiddleware;
+use Smetaniny\ReactAdminRouting\Models\PagesModel;
+use Smetaniny\ReactAdminRouting\Policies\PagesPolicy;
+use Smetaniny\ReactAdminRouting\Services\Contracts\ResourceShowInterface;
 use Smetaniny\ReactAdminRouting\Services\ResourceShowService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyFirstService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyGetService;
@@ -15,20 +17,31 @@ use Smetaniny\ReactAdminRouting\Services\ResourceStrategyGetService;
 class ReactAdminRoutingServiceProvider extends ServiceProvider
 {
     /**
+     * Политики для моделей.
+     *
+     * @var array
+     */
+    protected array $policies = [
+        // Регистрация политики для PagesModel
+        PagesModel::class => PagesPolicy::class,
+    ];
+
+    /**
      * Perform post-registration booting of services.
      *
      * @return void
      */
     public function boot(): void
     {
-         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // Загрузка маршрутов из файла
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/route.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
     }
 
     /**
@@ -63,8 +76,6 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
 
         // Помечает классы ResourceStrategyFirstService и ResourceStrategyGetService тегом 'QueryStrategyInterface'
         $this->app->tag([ResourceStrategyFirstService::class, ResourceStrategyGetService::class], 'QueryStrategyInterface');
-
-
     }
 
     /**
@@ -96,7 +107,7 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
 
         // php artisan vendor:publish --provider="Smetaniny\ReactAdminRouting\ReactAdminRoutingServiceProvider" --tag="react-admin-routing.routes"
         $this->publishes([
-            __DIR__ . '/routes.php' => base_path('routes/vendor/react-admin-routing.php'),
+            __DIR__ . '/route.php' => base_path('routes/vendor/react-admin-routing.php'),
         ], 'react-admin-routing.routes');
 
 

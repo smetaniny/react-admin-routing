@@ -14,6 +14,11 @@ use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
  */
 class PagesAdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(PagesModel::class, 'pages');
+    }
+
     /**
      * Получение списка страниц.
      *

@@ -3,7 +3,7 @@
 namespace Smetaniny\ReactAdminRouting\Factories;
 
 use Illuminate\Http\Request;
-use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerFactoryInterface;
+use Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface;
 use Smetaniny\ReactAdminRouting\Services\AdminRouteHandlerServices;
 
 /**

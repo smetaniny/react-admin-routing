@@ -1,0 +1,64 @@
+@startuml
+title Архитектура системы Smetaniny\ReactAdminRouting
+
+!define RECTANGLE class
+!define CIRCLE interface
+
+package "Smetaniny\ReactAdminRouting" {
+    RECTANGLE Controllers {
+        RECTANGLE LoginAdminController
+        RECTANGLE PagesAdminController
+        RECTANGLE UsersAdminController
+        RECTANGLE UsersController
+    }
+
+    RECTANGLE Models {
+        RECTANGLE UsersModel
+        RECTANGLE RolesModel
+        RECTANGLE PermissionsModel
+        RECTANGLE ProductsModel
+        RECTANGLE PagesModel
+    }
+
+    RECTANGLE Middleware {
+        RECTANGLE AdminMiddleware
+        RECTANGLE RoleAdminMiddleware
+    }
+
+    RECTANGLE Services {
+        RECTANGLE AdminRouteHandlerServices
+        RECTANGLE ResourceStrategyFirstService
+        RECTANGLE ResourceStrategyGetService
+    }
+
+    RECTANGLE Factories {
+        RECTANGLE AdminRouteHandlerFactory
+    }
+
+    RECTANGLE Policies {
+        RECTANGLE PagesPolicy
+    }
+
+    RECTANGLE Exceptions {
+        RECTANGLE RouteHandlerAdminException
+        RECTANGLE UnauthorizedAdminException
+    }
+
+    RECTANGLE Enums {
+        RECTANGLE UserAdminRole
+    }
+
+    RECTANGLE Facades {
+        RECTANGLE RouteHandlerFactoryFacade
+    }
+}
+
+Controllers --> Services : Используют
+Services --> Models : Обрабатывают данные
+Middleware --> Controllers : Проверяют доступ
+Factories --> Services : Создают объекты
+Facades --> Factories : Облегчают доступ
+Policies --> Models : Контролируют доступ
+Exceptions --> Controllers : Обрабатывают ошибки
+
+@enduml

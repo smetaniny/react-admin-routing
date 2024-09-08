@@ -1,0 +1,249 @@
+@startuml
+
+left to right direction
+
+' Класс для хранения информации о ролях
+class Role {
+    +id: BigInteger
+    +name: String
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of Role : Хранит информацию о ролях (например, Администратор, Редактор).
+
+' Класс для хранения информации о пользователях с административными правами
+class UserAdmin {
+    +id: BigInteger
+    +name: String
+    +email: String
+    +password: String
+    +is_active: Boolean
+    +last_login_at: Timestamp
+    +phone: String
+    +address: String
+    +avatar: String
+    +bio: Text
+    +language: String
+    +timezone: String
+    +social_links: JSON
+    +permissions: JSON
+    +custom_fields: JSON
+    +role_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of UserAdmin : Хранит данные о пользователях с правами администратора.
+
+' Класс для хранения информации о разрешениях
+class Permission {
+    +id: BigInteger
+    +name: String
+    +description: String
+    +group_permission_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of Permission : Описывает конкретные права доступа (например, просмотр, редактирование).
+
+' Класс для хранения информации о группах разрешений
+class GroupPermission {
+    +id: BigInteger
+    +name: String
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of GroupPermission : Группирует разрешения по категориям (например, права на управление пользователями).
+
+' Класс для хранения информации о категориях
+class Category {
+    +id: BigInteger
+    +name: String
+    +parent_id: BigInteger
+    +_lft: BigInteger
+    +_rgt: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of Category : Категории для группировки продуктов или контента.
+
+' Класс для хранения информации о продуктах
+class Product {
+    +id: BigInteger
+    +guid: String
+    +article: String
+    +name: String
+    +description: Text
+    +quantity: Integer
+    +price: Decimal
+    +category_id: BigInteger
+    +content_id: BigInteger
+    +russian_size_id: BigInteger
+    +international_size_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note top of Product : Информация о продуктах, которые можно купить (например, название, цена, количество).
+
+' Класс для хранения информации о контенте
+class Content {
+    +id: BigInteger
+    +slug: String
+    +title: String
+    +menu_title: String
+    +menu_index: Integer
+    +language: String
+    +content_js: Text
+    +content: Text
+    +description: Text
+    +meta_keywords: Text
+    +is_published: Boolean
+    +is_visible_url: Boolean
+    +is_open: Boolean
+    +published_at: Timestamp
+    +unpublished_at: Timestamp
+    +author_id: BigInteger
+    +updated_by_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of Content : Описывает информацию о страницах или статьях на сайте.
+
+' Класс для хранения информации об атрибутах продукта
+class ProductAttribute {
+    +id: BigInteger
+    +name: String
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of ProductAttribute : Описывает характеристики продукта (например, цвет или материал).
+
+' Класс для хранения значений атрибутов продукта
+class ProductAttributeValue {
+    +id: BigInteger
+    +value: String
+    +product_attribute_id: BigInteger
+    +product_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note top of ProductAttributeValue : Хранит значения атрибутов продуктов (например, значение "красный" для атрибута "цвет").
+
+' Класс для хранения информации о российских размерах
+class RussianSize {
+    +id: BigInteger
+    +size: String
+    +weight: Decimal
+    +price: Decimal
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of RussianSize : Информация о российских размерах продуктов (например, размер одежды).
+
+' Класс для хранения информации о международных размерах
+class InternationalSize {
+    +id: BigInteger
+    +size: String
+    +weight: Decimal
+    +price: Decimal
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of InternationalSize : Информация о международных размерах продуктов.
+
+' Класс для связи между ролями и пользователями
+class RoleUser {
+    +id: BigInteger
+    +role_id: BigInteger
+    +user_admin_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of RoleUser : Таблица для связи ролей с пользователями (многие ко многим).
+
+' Класс для связи между разрешениями и ролями
+class PermissionRole {
+    +id: BigInteger
+    +permission_id: BigInteger
+    +role_id: BigInteger
+    +created_at: Timestamp
+    +updated_at: Timestamp
+}
+note bottom of PermissionRole : Таблица для связи разрешений с ролями (многие ко многим).
+
+' Связь один ко многим между Role и UserAdmin (одна роль может иметь несколько пользователей)
+Role "1" --> "0..*" UserAdmin : "role_id"
+note bottom of Role : Одна роль может быть назначена нескольким администраторам.\nUserAdmin содержит роль через поле role_id.
+
+' Связь один ко многим между UserAdmin и Content (один пользователь может быть автором нескольких контентов)
+UserAdmin "1" --> "0..*" Content : "author_id"
+note bottom of Content : Один пользователь может создавать несколько статей или страниц.
+
+' Связь один ко многим между UserAdmin и Content (один пользователь может обновлять несколько контентов)
+UserAdmin "1" --> "0..*" Content : "updated_by_id"
+note bottom of Content : Один пользователь может обновлять несколько статей.
+
+' Связь многие ко многим между Role и Permission через PermissionRole
+Role "0..*" --> "0..*" Permission : "through PermissionRole"
+note bottom of Role : Одна роль может иметь несколько разрешений, а одно разрешение может быть привязано к разным ролям.
+
+' Связь многие ко одному между Permission и GroupPermission (несколько разрешений могут принадлежать одной группе)
+Permission "0..*" --> "1" GroupPermission : "group_permission_id"
+note bottom of Permission : Несколько разрешений могут относиться к одной группе (например, группа "Управление пользователями").
+
+' Связь многие ко многим между Role и UserAdmin через RoleUser
+Role "0..*" --> "0..*" UserAdmin : "through RoleUser"
+note bottom of Role : Один пользователь может иметь несколько ролей, и одна роль может быть у нескольких пользователей.
+
+' Связь многие ко многим между Permission и Role через PermissionRole
+Permission "0..*" --> "0..*" Role : "through PermissionRole"
+note bottom of Permission : Одно разрешение может быть связано с несколькими ролями, и одна роль может иметь несколько разрешений.
+
+' Связь Category с самой собой для иерархической структуры (одна категория может быть подкатегорией другой)
+Category "0..*" --> "0..1" Category : "parent_id"
+note bottom of Category : Категории могут быть вложенными, образуя иерархию (например, "Электроника" и "Смартфоны").
+
+' Связь один ко многим между Category и Product (одна категория может включать несколько продуктов)
+Category "1" --> "0..*" Product : "category_id"
+note bottom of Product : Одна категория может содержать несколько продуктов (например, категория "Одежда" включает футболки и штаны).
+
+' Связь один ко многим между Content и Product (один контент может быть связан с несколькими продуктами)
+Content "1" --> "0..*" Product : "content_id"
+note bottom of Product : Один контент может описывать несколько продуктов (например, одна статья связана с несколькими товарами).
+
+' Связь один ко многим между Product и ProductAttributeValue (один продукт может иметь несколько значений атрибутов)
+Product "1" --> "0..*" ProductAttributeValue : "product_id"
+note bottom of ProductAttributeValue : Один продукт может иметь несколько значений атрибутов (например, несколько цветов).
+
+' Связь один ко многим между ProductAttribute и ProductAttributeValue (один атрибут может иметь несколько значений)
+ProductAttribute "1" --> "0..*" ProductAttributeValue : "product_attribute_id"
+note bottom of ProductAttributeValue : Один атрибут может иметь несколько значений (например, атрибут "Цвет" может иметь значения "Красный", "Синий").
+
+' Связь один ко многим между Product и RussianSize (один продукт может иметь несколько размеров в российской системе)
+Product "1" --> "0..*" RussianSize : "product_id"
+note bottom of RussianSize : Один продукт может иметь несколько размеров (например, S, M, L).
+
+' Связь один ко многим между Product и InternationalSize (один продукт может иметь несколько размеров в международной системе)
+Product "1" --> "0..*" InternationalSize : "product_id"
+note bottom of InternationalSize : Один продукт может иметь несколько международных размеров (например, XS, S, M).
+
+' Связь многие ко многим между Product и RussianSize через промежуточную таблицу (если необходимо)
+Product "0..*" --> "0..*" RussianSize : "through ProductRussianSize"
+note bottom of Product : Если требуется более сложная связь между продуктами и размерами.
+
+' Связь многие ко многим между Product и InternationalSize через промежуточную таблицу (если необходимо)
+Product "0..*" --> "0..*" InternationalSize : "through ProductInternationalSize"
+note bottom of Product : Если требуется более сложная связь между продуктами и размерами.
+
+' Связь между PermissionRole и Permission
+PermissionRole "0..*" --> "1" Permission : "permission_id"
+
+' Связь между PermissionRole и Role
+PermissionRole "0..*" --> "1" Role : "role_id"
+
+' Связь между RoleUser и Role
+RoleUser "0..*" --> "1" Role : "role_id"
+
+' Связь между RoleUser и UserAdmin
+RoleUser "0..*" --> "1" UserAdmin : "user_admin_id"
+
+@enduml

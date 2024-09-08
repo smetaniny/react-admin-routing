@@ -1,6 +1,6 @@
 <?php
 
-namespace Smetaniny\ReactAdminRouting\Contracts;
+namespace Smetaniny\ReactAdminRouting\Services\Contracts;
 
 interface SetQueryStrategyInterface
 {

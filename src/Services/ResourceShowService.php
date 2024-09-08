@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
-use Smetaniny\ReactAdminRouting\Contracts\QueryStrategyInterface;
-use Smetaniny\ReactAdminRouting\Contracts\ResourceShowInterface;
+use Smetaniny\ReactAdminRouting\Services\Contracts\QueryStrategyInterface;
+use Smetaniny\ReactAdminRouting\Services\Contracts\ResourceShowInterface;
 use WeakMap;
 
 /**

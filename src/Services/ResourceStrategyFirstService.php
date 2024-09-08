@@ -3,7 +3,7 @@
 namespace Smetaniny\ReactAdminRouting\Services;
 
 use Illuminate\Database\Eloquent\Builder;
-use Smetaniny\ReactAdminRouting\Contracts\QueryStrategyInterface;
+use Smetaniny\ReactAdminRouting\Services\Contracts\QueryStrategyInterface;
 
 /**
  * Класс `GetFirstStrategy` реализует стратегию для получения первой записи из результата запроса.

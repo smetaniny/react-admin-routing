@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Smetaniny\ReactAdminRouting\Contracts\ResourceShowInterface;
-use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerInterface;
 use Smetaniny\ReactAdminRouting\Exceptions\RouteHandlerAdminException;
+use Smetaniny\ReactAdminRouting\Services\Contracts\ResourceShowInterface;
+use Smetaniny\ReactAdminRouting\Services\Contracts\RouteHandlerInterface;
 
 /**
  * Обработчик маршрутов для панели администратора.

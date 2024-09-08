@@ -5,9 +5,9 @@ namespace Smetaniny\ReactAdminRouting\Factories;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerFactoryInterface;
-use Smetaniny\ReactAdminRouting\Contracts\RouteHandlerInterface;
 use Smetaniny\ReactAdminRouting\Exceptions\RouteHandlerException;
+use Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface;
+use Smetaniny\ReactAdminRouting\Services\Contracts\RouteHandlerInterface;
 
 /**
  * Фабрика обработчиков маршрутов

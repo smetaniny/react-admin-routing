@@ -1,8 +1,9 @@
 <?php
 
-namespace Smetaniny\ReactAdminRouting\Contracts;
+namespace Smetaniny\ReactAdminRouting\Factories\Contracts;
 
 use Illuminate\Http\Request;
+use Smetaniny\ReactAdminRouting\Services\Contracts\RouteHandlerInterface;
 
 /**
  * Интерфейс фабрики обработчиков маршрутов

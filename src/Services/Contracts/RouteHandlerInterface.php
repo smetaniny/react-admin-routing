@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Smetaniny\ReactAdminRouting\Contracts;
+namespace Smetaniny\ReactAdminRouting\Services\Contracts;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
