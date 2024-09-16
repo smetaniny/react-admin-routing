@@ -7,6 +7,9 @@ use Smetaniny\ReactAdminRouting\Services\Contracts\RouteHandlerInterface;
 
 /**
  * Интерфейс фабрики обработчиков маршрутов
+ *
+ * @uses \Smetaniny\ReactAdminRouting\Factories\RouteHandlerFactory
+ * @uses \Smetaniny\ReactAdminRouting\Factories\AdminRouteHandlerFactory
  */
 interface RouteHandlerFactoryInterface {
 

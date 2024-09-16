@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-
 namespace Smetaniny\ReactAdminRouting\Exceptions;
 
 use Exception;

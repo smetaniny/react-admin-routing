@@ -5,7 +5,7 @@ namespace Smetaniny\ReactAdminRouting\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class PermissionRole extends Model
+class PermissionRoleModel extends Model
 {
     protected $table = 'permission_role'; // Указываем имя таблицы
 

@@ -2,103 +2,71 @@
 
 namespace Smetaniny\ReactAdminRouting\Policies;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use Smetaniny\ReactAdminRouting\Models\UsersAdminModel;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Smetaniny\ReactAdminRouting\Policies\Contracts\PolicyInterface;
 
 /**
  * Абстрактный класс AbstractPolicy
  *
  * Этот класс реализует общую логику для всех политик доступа к моделям.
- * 
+ *
  * Он предоставляет базовые методы проверки прав на просмотр, создание, обновление
  * и удаление моделей. Другие политики могут наследовать этот класс и
  * при необходимости переопределять методы.
  */
 abstract class AbstractPolicy implements PolicyInterface
 {
+    use HandlesAuthorization;
+
     /**
-     * Проверка, может ли пользователь видеть список всех моделей.
+     * Проверяет, имеет ли пользователь конкретное разрешение.
      *
-     * По умолчанию доступ разрешен только администраторам.
+     * @param UsersAdminModel $user
+     * @param string $permission
      *
-     * @param User $user Пользователь, для которого проверяется право
-     * @return bool Возвращает true, если пользователь является администратором
+     * @return bool
      */
-    public function viewAny(User $user): bool
+    protected function hasPermission(UsersAdminModel $user, string $permission): bool
     {
-        return $user->role === 'admin';
+        // Получаем все разрешения, которые назначены пользователю через его роль
+        $permissions = $user->roles->flatMap(function ($role) {
+            return $role->permissions->pluck('name');
+        });
+
+        // Проверяем, содержится ли нужное разрешение в списке разрешений пользователя
+        return $permissions->contains($permission);
     }
 
     /**
-     * Проверка, может ли пользователь видеть конкретную модель.
+     * Общий метод для проверки, является ли пользователь администратором.
      *
-     * По умолчанию пользователь может видеть модель, если она ему принадлежит
-     * или если он является администратором.
+     * @param UsersAdminModel $user
      *
-     * @param User $user Пользователь, для которого проверяется право
-     * @param Model $model Модель, доступ к которой проверяется
-     * @return bool Возвращает true, если пользователь владеет моделью или является администратором
+     * @return bool
      */
-    public function view(User $user, Model $model): bool
+    protected function isAdmin(UsersAdminModel $user): bool
     {
-        return $user->id === $model->user_id || $this->isAdmin($user);
+        return $user->roles->contains('name', 'admin');
     }
 
     /**
-     * Проверка, может ли пользователь создавать новую модель.
+     * Проверка, имеет ли пользователь доступ к указанному ресурсу.
      *
-     * По умолчанию право на создание модели предоставляется пользователям с ролью "author".
+     * @param UsersAdminModel $user
+     * @param string $resource
      *
-     * @param User $user Пользователь, для которого проверяется право
-     * @return bool Возвращает true, если пользователь имеет роль "author"
+     * @return bool
      */
-    public function create(User $user): bool
+    public function canAccess(UsersAdminModel $user, string $resource): bool
     {
-        return $user->role === 'author';
-    }
+        // Если пользователь супер-админ, ему разрешены все действия
+        if ($this->isAdmin($user)) {
+            return true;
+        }
 
-    /**
-     * Проверка, может ли пользователь обновить модель.
-     *
-     * По умолчанию пользователь может обновить модель, если она ему принадлежит
-     * или если он является администратором.
-     *
-     * @param User $user Пользователь, для которого проверяется право
-     * @param Model $model Модель, которую пользователь хочет обновить
-     * @return bool Возвращает true, если пользователь владеет моделью или является администратором
-     */
-    public function update(User $user, Model $model): bool
-    {
-        return $user->id === $model->user_id || $this->isAdmin($user);
-    }
-
-    /**
-     * Проверка, может ли пользователь удалить модель.
-     *
-     * По умолчанию пользователь может удалить модель, если она ему принадлежит
-     * или если он является администратором.
-     *
-     * @param User $user Пользователь, для которого проверяется право
-     * @param Model $model Модель, которую пользователь хочет удалить
-     * @return bool Возвращает true, если пользователь владеет моделью или является администратором
-     */
-    public function delete(User $user, Model $model): bool
-    {
-        return $user->id === $model->user_id || $this->isAdmin($user);
-    }
-
-    /**
-     * Вспомогательный метод для проверки, является ли пользователь администратором.
-     *
-     * Этот метод используется для упрощения логики в других методах,
-     * где требуется проверка прав администратора.
-     *
-     * @param User $user Пользователь, для которого проверяется роль
-     * @return bool Возвращает true, если пользователь имеет роль "admin"
-     */
-    protected function isAdmin(User $user): bool
-    {
-        return $user->role === 'admin';
+        // Проверка конкретного права
+        return $this->hasPermission($user, $resource);
     }
 }
+

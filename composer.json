@@ -27,15 +27,5 @@
         "psr-4": {
             "Smetaniny\\ReactAdminRouting\\Tests\\": "tests"
         }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Smetaniny\\ReactAdminRouting\\ReactAdminRoutingServiceProvider"
-            ],
-            "aliases": {
-                "ReactAdminRouting": "Smetaniny\\ReactAdminRouting\\Facades\\ReactAdminRouting"
-            }
-        }
     }
 }

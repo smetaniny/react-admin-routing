@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Фасад для фабрики обработчиков маршрутов.
  *
+ * @uses \Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface
+ *
  * @method static createHandler(Request $request) Создает обработчик маршрута на основе запроса.
  */
 class RouteHandlerFactoryFacade extends Facade

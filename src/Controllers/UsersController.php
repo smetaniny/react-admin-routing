@@ -7,7 +7,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Smetaniny\ReactAdminRouting\Models\UsersAdminModel;
 use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
-use Smetaniny\ReactAdminRouting\Models\UsersModel;
 
 class
 UsersController extends Controller
@@ -28,7 +27,7 @@ UsersController extends Controller
 
         // Создается обработчик запроса и возвращает результат выполнения
         return RouteHandlerFactoryFacade::createHandler($request)
-            ->handle($request, UsersModel::query()
+            ->handle($request, UsersAdminModel::query()
                 ->with('role.permissions'));
     }
 
@@ -50,7 +49,7 @@ UsersController extends Controller
 
         // Создается обработчик запроса и возвращает результат выполнения
         return RouteHandlerFactoryFacade::createHandler($request)
-            ->handle($request, UsersModel::query()
+            ->handle($request, UsersAdminModel::query()
                 ->findOrFail($id)
                 ->with('role.permissions'));
     }

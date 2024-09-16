@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
 /**
  * Модель для ролей.
+ *
+ * @uses \Smetaniny\ReactAdminRouting\Policies\PagesPolicy
+ *
+ * @method static where(string $string, string $roleName)
  */
 class RolesModel extends Model
 {

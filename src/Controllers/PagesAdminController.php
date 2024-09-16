@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Smetaniny\ReactAdminRouting\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Smetaniny\ReactAdminRouting\Models\PagesModel;
@@ -14,20 +15,18 @@ use Smetaniny\ReactAdminRouting\Facades\RouteHandlerFactoryFacade;
  */
 class PagesAdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(PagesModel::class, 'pages');
-    }
-
     /**
      * Получение списка страниц.
      *
      * @param Request $request
      *
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function index(Request $request): JsonResponse
     {
+        $this->authorize('viewAny', PagesModel::class);
+
         // Создается обработчик запроса и возвращает результат выполнения
         return RouteHandlerFactoryFacade::createHandler($request)
             ->handle(

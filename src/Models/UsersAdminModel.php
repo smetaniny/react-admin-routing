@@ -5,6 +5,7 @@ namespace Smetaniny\ReactAdminRouting\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -66,5 +67,16 @@ class UsersAdminModel extends Model
     public function role(): BelongsTo
     {
         return $this->belongsTo(RolesModel::class);
+    }
+
+    /**
+     *
+     * Получить все роли.
+     *
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(RolesModel::class, 'roles_users', 'user_admin_id', 'role_id');
     }
 }

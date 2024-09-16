@@ -2,29 +2,22 @@
 
 namespace Smetaniny\ReactAdminRouting;
 
+use App\WebSocket\Facades\ClientManagerFacade;
+use App\WebSocket\Facades\ErrorHandlerFacade;
+use App\WebSocket\Facades\RouterFacade;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Smetaniny\ReactAdminRouting\Exceptions\HandleReactAdmin;
 use Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface;
 use Smetaniny\ReactAdminRouting\Factories\RouteHandlerFactory;
 use Smetaniny\ReactAdminRouting\Middleware\AdminMiddleware;
 use Smetaniny\ReactAdminRouting\Middleware\RoleAdminMiddleware;
-use Smetaniny\ReactAdminRouting\Models\PagesModel;
-use Smetaniny\ReactAdminRouting\Policies\PagesPolicy;
 use Smetaniny\ReactAdminRouting\Services\Contracts\ResourceShowInterface;
 use Smetaniny\ReactAdminRouting\Services\ResourceShowService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyFirstService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyGetService;
 
-class ReactAdminRoutingServiceProvider extends ServiceProvider
+class ReactAdminServiceProvider extends ServiceProvider
 {
-    /**
-     * Политики для моделей.
-     *
-     * @var array
-     */
-    protected array $policies = [
-        // Регистрация политики для PagesModel
-        PagesModel::class => PagesPolicy::class,
-    ];
 
     /**
      * Perform post-registration booting of services.
@@ -33,7 +26,9 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        parent::boot();
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         // Загрузка маршрутов из файла
         $this->loadRoutesFrom(__DIR__ . '/route.php');
 
@@ -42,6 +37,11 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
             $this->bootForConsole();
         }
 
+        // Регистрация фасадов может быть здесь, либо в другом месте
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Router', RouterFacade::class);
+        $loader->alias('ClientManager', ClientManagerFacade::class);
+        $loader->alias('ErrorHandler', ErrorHandlerFacade::class);
     }
 
     /**
@@ -76,6 +76,15 @@ class ReactAdminRoutingServiceProvider extends ServiceProvider
 
         // Помечает классы ResourceStrategyFirstService и ResourceStrategyGetService тегом 'QueryStrategyInterface'
         $this->app->tag([ResourceStrategyFirstService::class, ResourceStrategyGetService::class], 'QueryStrategyInterface');
+
+        // Регистрируем Auth провайдеров
+        $this->app->register(AuthReactAdminServiceProvider::class);
+
+        // Регистрируем обработчик исключений
+        $this->app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            HandleReactAdmin::class
+        );
     }
 
     /**

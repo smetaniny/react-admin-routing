@@ -2,8 +2,8 @@
 
 namespace Smetaniny\ReactAdminRouting\Policies\Contracts;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Smetaniny\ReactAdminRouting\Models\UsersAdminModel;
 
 /**
  * Interface PolicyInterface
@@ -15,45 +15,37 @@ use Illuminate\Database\Eloquent\Model;
 interface PolicyInterface
 {
     /**
-     * Определяет, может ли пользователь просматривать список всех моделей.
+     * Определяет, может ли пользователь просматривать.
      *
-     * @param User $user Пользователь, для которого проверяется право
+     * @param UsersAdminModel $user Пользователь, для которого проверяется право
      * @return bool Возвращает true, если пользователь имеет право на просмотр всех моделей
      */
-    public function viewAny(User $user): bool;
+    public function viewAny(UsersAdminModel $user): bool;
 
-    /**
-     * Определяет, может ли пользователь просматривать конкретную модель.
-     *
-     * @param User $user Пользователь, для которого проверяется право
-     * @param Model $model Модель, доступ к которой проверяется
-     * @return bool Возвращает true, если пользователь имеет право на просмотр этой модели
-     */
-    public function view(User $user, Model $model): bool;
 
     /**
      * Определяет, может ли пользователь создавать новую модель.
      *
-     * @param User $user Пользователь, для которого проверяется право
+     * @param UsersAdminModel $user Пользователь, для которого проверяется право
      * @return bool Возвращает true, если пользователь имеет право на создание модели
      */
-    public function create(User $user): bool;
+    public function create(UsersAdminModel $user): bool;
 
     /**
      * Определяет, может ли пользователь обновить существующую модель.
      *
-     * @param User $user Пользователь, для которого проверяется право
+     * @param UsersAdminModel $user Пользователь, для которого проверяется право
      * @param Model $model Модель, которую пользователь пытается обновить
      * @return bool Возвращает true, если пользователь имеет право на обновление этой модели
      */
-    public function update(User $user, Model $model): bool;
+    public function update(UsersAdminModel $user, Model $model): bool;
 
     /**
      * Определяет, может ли пользователь удалить существующую модель.
      *
-     * @param User $user Пользователь, для которого проверяется право
+     * @param UsersAdminModel $user Пользователь, для которого проверяется право
      * @param Model $model Модель, которую пользователь пытается удалить
      * @return bool Возвращает true, если пользователь имеет право на удаление этой модели
      */
-    public function delete(User $user, Model $model): bool;
+    public function delete(UsersAdminModel $user, Model $model): bool;
 }
