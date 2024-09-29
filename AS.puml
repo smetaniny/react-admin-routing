@@ -10,10 +10,12 @@ package "Smetaniny\ReactAdminRouting" {
         RECTANGLE PagesAdminController
         RECTANGLE UsersAdminController
         RECTANGLE UsersController
+        RECTANGLE RolesAdminController
+        RECTANGLE PermissionsAdminController
     }
 
     RECTANGLE Models {
-        RECTANGLE UsersModel
+        RECTANGLE UsersAdminModel
         RECTANGLE RolesModel
         RECTANGLE PermissionsModel
         RECTANGLE ProductsModel
@@ -37,6 +39,8 @@ package "Smetaniny\ReactAdminRouting" {
 
     RECTANGLE Policies {
         RECTANGLE PagesPolicy
+        RECTANGLE UsersPolicy
+        RECTANGLE RolesPolicy
     }
 
     RECTANGLE Exceptions {

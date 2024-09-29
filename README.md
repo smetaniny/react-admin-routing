@@ -1,57 +1,33 @@
-# ReactAdminRouting
+# Smetaniny\ReactAdminRouting
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+## Описание
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+**Smetaniny\ReactAdminRouting** — это проект, разработанный для упрощения управления административной панелью с помощью
+маршрутизации и аутентификации пользователей. Он предоставляет интерфейс для управления страницами, пользователями,
+ролями и правами доступа в админ-панели.
 
-## Installation
+## Архитектура системы
 
-Via Composer
+Система включает в себя следующие ключевые компоненты:
+
+- **Контроллеры**: Обрабатывают входящие HTTP-запросы и управляют логикой приложения.
+- **Модели**: Определяют структуру данных и взаимодействие с базой данных.
+- **Сервисы**: Реализуют бизнес-логику и используют модели для обработки данных.
+- **Middleware**: Проверяет доступ и аутентификацию пользователей.
+- **Фабрики**: Создают объекты для упрощения работы с различными сервисами.
+- **Исключения**: Обрабатывают ошибки, возникающие в процессе работы приложения.
+- **Политики**: Контролируют доступ к различным ресурсам в зависимости от прав пользователей.
+
+## Установка
+
+Установите через Composer:
 
 ```bash
 composer require smetaniny/react-admin-routing
 ```
 
-## Usage
-
-## Change log
-
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
+## Тестирование
 
 ```bash
 composer test
 ```
-
-## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email author@email.com instead of using the issue tracker.
-
-## Credits
-
-- [Author Name][link-author]
-- [All Contributors][link-contributors]
-
-## License
-
-MIT. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/smetaniny/react-admin-routing.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/smetaniny/react-admin-routing.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/smetaniny/react-admin-routing/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/smetaniny/react-admin-routing
-[link-downloads]: https://packagist.org/packages/smetaniny/react-admin-routing
-[link-travis]: https://travis-ci.org/smetaniny/react-admin-routing
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/smetaniny
-[link-contributors]: ../../contributors
