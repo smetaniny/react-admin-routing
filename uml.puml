@@ -12,6 +12,7 @@ package "Smetaniny\ReactAdminRouting" {
         RECTANGLE UsersController
         RECTANGLE RolesAdminController
         RECTANGLE PermissionsAdminController
+        RECTANGLE GroupPermissionAdminController
     }
 
     RECTANGLE Models {
@@ -20,6 +21,7 @@ package "Smetaniny\ReactAdminRouting" {
         RECTANGLE PermissionsModel
         RECTANGLE ProductsModel
         RECTANGLE PagesModel
+        RECTANGLE GroupPermissionModel
     }
 
     RECTANGLE Middleware {
@@ -29,11 +31,13 @@ package "Smetaniny\ReactAdminRouting" {
 
     RECTANGLE Services {
         RECTANGLE AdminRouteHandlerServices
+        RECTANGLE ResourceShowService
         RECTANGLE ResourceStrategyFirstService
         RECTANGLE ResourceStrategyGetService
     }
 
     RECTANGLE Factories {
+        RECTANGLE RouteHandlerFactory
         RECTANGLE AdminRouteHandlerFactory
     }
 
@@ -41,11 +45,14 @@ package "Smetaniny\ReactAdminRouting" {
         RECTANGLE PagesPolicy
         RECTANGLE UsersPolicy
         RECTANGLE RolesPolicy
+        RECTANGLE PermissionsPolicy
+        RECTANGLE GroupPermissionPolicy
     }
 
     RECTANGLE Exceptions {
         RECTANGLE RouteHandlerAdminException
         RECTANGLE UnauthorizedAdminException
+        RECTANGLE ResourceNotFoundException
     }
 
     RECTANGLE Enums {
@@ -64,5 +71,7 @@ Factories --> Services : Создают объекты
 Facades --> Factories : Облегчают доступ
 Policies --> Models : Контролируют доступ
 Exceptions --> Controllers : Обрабатывают ошибки
-
+Controllers --> Policies : Используют
+Models --> Enums : Используют
+Services --> Exceptions : Обрабатывают ошибки
 @enduml
