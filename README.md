@@ -1,4 +1,4 @@
-# Smetaniny\ReactAdminRouting
+# ReactAdminRouting
 
 ## 1. Описание системы
 
