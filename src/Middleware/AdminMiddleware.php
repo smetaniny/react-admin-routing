@@ -15,7 +15,7 @@ class AdminMiddleware
      * Обработка запроса.
      *
      * @param Request $request Запрос.
-     * @param Closure $next Следующий обработчик.
+     * @param Closure $next    Следующий обработчик.
      *
      * @return Response Ответ.
      */

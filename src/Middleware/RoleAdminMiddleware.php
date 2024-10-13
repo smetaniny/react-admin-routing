@@ -19,7 +19,7 @@ class RoleAdminMiddleware
      *
      * @param Request $request
      * @param Closure $next
-     * @param ...$roles
+     * @param         ...$roles
      *
      * @return JsonResponse|mixed
      * @throws UnauthorizedAdminException
