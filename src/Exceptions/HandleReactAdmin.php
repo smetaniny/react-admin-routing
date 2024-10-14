@@ -2,7 +2,7 @@
 
 namespace Smetaniny\ReactAdminRouting\Exceptions;
 
-use App\Exceptions\Handler;
+use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Config;
 use Throwable;

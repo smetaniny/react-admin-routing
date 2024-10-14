@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Smetaniny\ReactAdminRouting\Requests;
 
-use App\Http\Requests\TraitFormValidationResponse;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

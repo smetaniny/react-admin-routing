@@ -2,10 +2,7 @@
 
 namespace Smetaniny\ReactAdminRouting;
 
-use App\WebSocket\Facades\ClientManagerFacade;
-use App\WebSocket\Facades\ErrorHandlerFacade;
-use App\WebSocket\Facades\RouterFacade;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as AppRouteServiceProvider;
 use Smetaniny\ReactAdminRouting\Exceptions\HandleReactAdmin;
 use Smetaniny\ReactAdminRouting\Factories\Contracts\RouteHandlerFactoryInterface;
 use Smetaniny\ReactAdminRouting\Factories\RouteHandlerFactory;
@@ -16,33 +13,8 @@ use Smetaniny\ReactAdminRouting\Services\ResourceShowService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyFirstService;
 use Smetaniny\ReactAdminRouting\Services\ResourceStrategyGetService;
 
-class ReactAdminServiceProvider extends ServiceProvider
+class ReactAdminServiceProvider extends AppRouteServiceProvider
 {
-
-    /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-        parent::boot();
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        // Загрузка маршрутов из файла
-        $this->loadRoutesFrom(__DIR__ . '/route.php');
-
-        // Publishing is only necessary when using the CLI.
-        if ($this->app->runningInConsole()) {
-            $this->bootForConsole();
-        }
-
-        // Регистрация фасадов может быть здесь, либо в другом месте
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        $loader->alias('Router', RouterFacade::class);
-        $loader->alias('ClientManager', ClientManagerFacade::class);
-        $loader->alias('ErrorHandler', ErrorHandlerFacade::class);
-    }
 
     /**
      * Register any package services.
@@ -85,6 +57,27 @@ class ReactAdminServiceProvider extends ServiceProvider
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             HandleReactAdmin::class
         );
+    }
+
+    /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        parent::boot();
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        // Загрузка маршрутов из файла
+        $this->loadRoutesFrom(__DIR__ . '/route.php');
+
+        // Publishing is only necessary when using the CLI.
+        if ($this->app->runningInConsole()) {
+            $this->bootForConsole();
+        }
+
+        \Illuminate\Foundation\AliasLoader::getInstance();
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Smetaniny\ReactAdminRouting\Enums\UserAdminRole;
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
     // Авторизация администратора
     Route::post('/login', [\Smetaniny\ReactAdminRouting\Controllers\LoginAdminController::class, 'index'])->name('login');
