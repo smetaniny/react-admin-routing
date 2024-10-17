@@ -10,6 +10,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 /**
  * Класс модели категорий.
+ *
  */
 class CategoriesModel extends Model
 {

@@ -1,19 +1,25 @@
 {
     "name": "smetaniny/react-admin-routing",
-    "description": ":package_description",
+    "description": "Административной панелью React Admin",
     "license": "MIT",
     "authors": [
         {
             "name": "Smetaniny",
             "email": "sm.sergey.v@yandex.ru",
-            "homepage": "smetaniny.ru"
+            "homepage": "https://smetaniny.ru/"
         }
     ],
     "homepage": "https://github.com/smetaniny/react-admin-routing",
-    "keywords": ["Laravel", "ReactAdminRouting"],
+    "keywords": ["Laravel", "React Admin"],
     "autoload": {
         "psr-4": {
             "Smetaniny\\ReactAdminRouting\\": "src/"
         }
+    },
+    "require": {
+        "kalnoy/nestedset": "^6.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan-strict-rules": "^1.6"
     }
 }

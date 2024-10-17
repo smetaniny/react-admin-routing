@@ -10,19 +10,11 @@ use Smetaniny\ReactAdminRouting\Models\CategoriesModel;
  */
 class ImportCategoriesCommand extends Command
 {
-    /**
-     * Название и подпись консольной команды.
-     *
-     * @var string
-     */
+    // Название и подпись консольной команды.
     protected $signature = 'import:categories {file=database/data/categories/cloth.json : Путь к JSON файлу}';
 
 
-    /**
-     * Описание консольной команды.
-     *
-     * @var string
-     */
+    // Описание консольной команды.
     protected $description = 'Импорт категорий из JSON файла в базу данных';
 
     /**
@@ -62,15 +54,15 @@ class ImportCategoriesCommand extends Command
     /**
      * Сохранить категории рекурсивно.
      *
-     * @param array $categories
-     * @param int|null $parentId
+     * @param array<string, array<string>|string> $categories Ассоциативный массив категорий, где ключ — имя категории, а значение — массив подкатегорий или строка.
+     * @param int|null $parentId Идентификатор родительской категории.
      */
     private function saveCategories(array $categories, int $parentId = null): void
     {
         foreach ($categories as $categoryName => $subcategories) {
             // Проверяем, является ли текущий элемент массивом или строкой
             if (is_array($subcategories)) {
-                // Если это массив, то предполагаем, что он содержит подкатегории или строки
+                // Если это массив, то предполагаем, что он содержит подкатегории
                 $category = CategoriesModel::create([
                     'name' => $categoryName,
                     'parent_id' => $parentId,
@@ -87,4 +79,5 @@ class ImportCategoriesCommand extends Command
             }
         }
     }
+
 }
