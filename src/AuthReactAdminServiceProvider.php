@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Smetaniny\ReactAdminRouting;
 
@@ -10,6 +11,11 @@ use Smetaniny\ReactAdminRouting\Models\PagesModel;
 use Smetaniny\ReactAdminRouting\Models\UsersAdminModel;
 use Smetaniny\ReactAdminRouting\Policies\PagesPolicy;
 
+/**
+ *
+ *
+ * @author Smetanin Sergey
+ */
 class AuthReactAdminServiceProvider extends ServiceProvider
 {
     /**
